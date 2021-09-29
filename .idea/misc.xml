@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/drawable/ic_calendar.xml" value="0.3296296296296296" />
+        <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/drawable/shape_app_bar.xml" value="0.5" />
+        <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/drawable/shape_card_item_holder_movie.xml" value="0.31666666666666665" />
+        <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/drawable/shape_card_search.xml" value="0.3296296296296296" />
+        <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/drawable/vec_test.xml" value="0.32222222222222224" />
+        <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/font/roboto.xml" value="0.31666666666666665" />
+        <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/layout/inc_error_search.xml" value="0.3875" />
+        <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/layout/item_holder_movie.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

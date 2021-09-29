@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MovieDBSurf</string>
+    <string name="search_by_name">Search by movie title</string>
+</resources>

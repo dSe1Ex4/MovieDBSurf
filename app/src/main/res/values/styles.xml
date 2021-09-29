@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ShapeAppearanceOverlay.App.CornerCut" parent="">
+        <item name="cornerSizeTopLeft">@dimen/card_movie_radius</item>
+        <item name="cornerSizeBottomLeft">@dimen/card_movie_radius</item>
+    </style>
+</resources>
