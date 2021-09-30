@@ -7,11 +7,27 @@ import test.surf.moviedb.rest.dto.MoviePageDTO
  *
  * https://developers.themoviedb.org/3/discover/movie-discover
  */
-interface MovieApi {
+interface MovieDiscoverApi {
     /**
      * @param apiKey Required api key
      * @param language Specify a language to query translatable fields with. (en-US)
      * @param page Specify the page of results to query. (1)
      */
-    suspend fun getMoviePage(apiKey: String, language: String, page: Int) : MoviePageDTO
+    suspend fun getDiscoverMoviePage(apiKey: String, language: String, page: Int) : MoviePageDTO
+}
+
+
+/**
+ * The Movie DB API 3 - Search Movies
+ *
+ * https://developers.themoviedb.org/3/search/search-movies
+ */
+interface MovieSearchApi {
+    /**
+     * @param apiKey Required api key
+     * @param language Specify a language to query translatable fields with. (en-US)
+     * @param query Required text query to search
+     * @param page Specify the page of results to query. (1)
+     */
+    suspend fun getMoviePageByQuery(apiKey: String, language: String, query: String, page: Int) : MoviePageDTO
 }
