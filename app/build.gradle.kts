@@ -17,6 +17,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    val apiKeysFielder = ApiKeysFielder(projectDir.absolutePath)
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -26,6 +27,9 @@ android {
             )
 
             for (field in BuildFields.RELEASE.ACTUAL_FIELDS){
+                buildConfigField(field.type, field.name, "\"${field.value}\"")
+            }
+            for (field in apiKeysFielder.releaseBuildFields){
                 buildConfigField(field.type, field.name, "\"${field.value}\"")
             }
         }
@@ -42,23 +46,12 @@ android {
             for (field in BuildFields.DEBUG.ACTUAL_FIELDS){
                 buildConfigField(field.type, field.name, "\"${field.value}\"")
             }
+            for (field in apiKeysFielder.debugBuildFields){
+                buildConfigField(field.type, field.name, "\"${field.value}\"")
+            }
         }
 
     }
-
-/*
-   flavorDimensions.addAll(listOf("version"))
-    productFlavors {
-        create("demo") {
-            dimension = "version"
-
-            applicationIdSuffix = ".demo"
-            versionNameSuffix = "-demo"
-        }
-        create("main"){
-            dimension = "version"
-        }
-    }*/
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

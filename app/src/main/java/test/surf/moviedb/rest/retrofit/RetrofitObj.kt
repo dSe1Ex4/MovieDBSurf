@@ -7,7 +7,7 @@ import test.surf.moviedb.BuildConfig
 object RetrofitObj {
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(BuildConfig.TheMovieDBBaseUrl)
+        .baseUrl(BuildConfig.TMDB_BASE_URL)
         .build()
 
     fun create() : RetrofitApi = retrofit.create(RetrofitApi::class.java)

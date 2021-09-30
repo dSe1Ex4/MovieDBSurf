@@ -1,0 +1,1 @@
+class BuildField(val name: String, val value: String, val type: String = "String")
