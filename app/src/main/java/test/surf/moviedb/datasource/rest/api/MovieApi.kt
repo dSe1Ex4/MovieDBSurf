@@ -1,6 +1,6 @@
-package test.surf.moviedb.rest.api
+package test.surf.moviedb.datasource.rest.api
 
-import test.surf.moviedb.rest.dto.MoviePageDTO
+import test.surf.moviedb.datasource.rest.dto.MoviePageDTO
 
 /**
  * The Movie DB API 3 - Movie Discover

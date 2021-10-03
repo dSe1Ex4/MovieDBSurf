@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">MovieDBSurf</string>
     <string name="search_by_name">Search by movie title</string>
+    <string name="error_internet">Check your internet connection and try again</string>
+    <string name="error_request_failed">We could not process your request. Please try again</string>
+    <string name="error_search_empty">Nothing found for \"%1$s\"</string>
+    <string name="t_unknown">Unknown</string>
 </resources>

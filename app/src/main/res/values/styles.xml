@@ -4,4 +4,5 @@
         <item name="cornerSizeTopLeft">@dimen/card_movie_radius</item>
         <item name="cornerSizeBottomLeft">@dimen/card_movie_radius</item>
     </style>
+
 </resources>

@@ -1,4 +1,4 @@
-package test.surf.moviedb.rest.dto
+package test.surf.moviedb.datasource.rest.dto
 
 import com.google.gson.annotations.SerializedName
 

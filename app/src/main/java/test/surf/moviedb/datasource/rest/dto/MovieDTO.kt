@@ -1,6 +1,7 @@
-package test.surf.moviedb.rest.dto
+package test.surf.moviedb.datasource.rest.dto
 
 import com.google.gson.annotations.SerializedName
+import test.surf.moviedb.model.Movie
 
 /**
  * DTO Movie (The Movie DB API 3)
@@ -13,7 +14,7 @@ data class MovieDTO(
     @SerializedName("poster_path") val posterPath : String?,
     @SerializedName("adult") val isAdult : Boolean,
     @SerializedName("overview") val overview : String,
-    @SerializedName("release_date") val releaseDate : String,
+    @SerializedName("release_date") val releaseDate : String?,
     @SerializedName("genre_ids") val genreIds : List<Int>,
     @SerializedName("original_title") val originalTitle : String,
     @SerializedName("original_language") val originalLanguage : String,
@@ -22,4 +23,6 @@ data class MovieDTO(
     @SerializedName("vote_count") val voteCount : Int,
     @SerializedName("video") val isVideo : Boolean,
     @SerializedName("vote_average") val voteAverage : Double
-)
+){
+    fun toMovieModel() : Movie = Movie(id, title, overview, posterPath, releaseDate)
+}

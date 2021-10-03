@@ -7,7 +7,7 @@
     tools:context=".ui.MainActivity">
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/appBarFrameLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_app_bar"
@@ -24,6 +24,7 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="6dp"
+            android:imeOptions="actionSearch"
             android:background="@drawable/shape_card_search"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="27dp"
@@ -39,38 +40,59 @@
 
     </FrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_movie"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:paddingBottom="72dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pb_top"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_holder_movie"
-        tools:visibility="visible">
+        app:layout_constraintTop_toBottomOf="@id/pb_top">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_movie"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_holder_movie"
+            tools:visibility="visible" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <ProgressBar
         android:id="@+id/pb_top"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="0dp"
-        android:layout_height="4dp"
+        android:layout_height="8dp"
+        android:scaleY="2"
         android:indeterminateTint="@color/blue_ribbon"
-        android:progress="60"
-        android:progressBackgroundTint="@color/blue_ribbon"
-        android:progressBackgroundTintMode="src_atop"
+        android:indeterminateTintMode="src_in"
+        android:indeterminate="true"
         android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarFrameLayout"
+        tools:visibility="visible" />
+
+<!-- As Figma
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/blue_ribbon"
+        app:trackColor="@color/blue_ribbon_50"
+        app:trackThickness="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout"
         tools:visibility="visible" />
+-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_reload"
@@ -89,6 +111,7 @@
         tools:visibility="visible" />
 
     <include
+        android:id="@+id/inc_error_panel"
         layout="@layout/inc_error_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -104,8 +127,8 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
         android:indeterminate="true"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

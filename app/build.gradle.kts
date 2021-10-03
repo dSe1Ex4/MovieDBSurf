@@ -1,7 +1,9 @@
 plugins {
     id("com.android.application")
-
     kotlin("android")
+    kotlin("kapt")
+
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -68,12 +70,16 @@ android {
 dependencies {
     //KTX
     implementation( "androidx.core:core-ktx:${Versions.coreKtx}")
+    implementation("androidx.activity:activity-ktx:${Versions.activityKtx}")
 
     //UI
     implementation( "com.google.android.material:material:${Versions.material}")
     implementation( "androidx.appcompat:appcompat:${Versions.appcompat}")
     implementation( "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}")
     implementation( "androidx.recyclerview:recyclerview:${Versions.recyclerview}")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swiperefreshlayout}")
+    implementation("com.github.bumptech.glide:glide:${Versions.glide}")
+    kapt("com.github.bumptech.glide:compiler:${Versions.glide}")
 
     //Serialization
     implementation("com.google.code.gson:gson:${Versions.gson}")
@@ -81,6 +87,18 @@ dependencies {
     //REST
     implementation("com.squareup.retrofit2:retrofit:${Versions.retrofit}")
     implementation("com.squareup.retrofit2:converter-gson:${Versions.retrofitGsonConvertor}")
+
+    //DI Hilt
+    implementation("com.google.dagger:hilt-android:${Versions.hilt}")
+    kapt("com.google.dagger:hilt-android-compiler:${Versions.hilt}")
+
+    //Viewmodel & Lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}")
+    kapt("androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}")
+
+    //DataStore
+    implementation("androidx.datastore:datastore-preferences:${Versions.datastore_preferences}")
 
     //TEST
     testImplementation( "junit:junit:${Versions.Tests.junit}")

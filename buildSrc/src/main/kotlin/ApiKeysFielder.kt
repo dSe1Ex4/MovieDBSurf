@@ -1,5 +1,8 @@
 import java.io.File
 
+/**
+ * Simple API Keys BuildField Fielder for OpenSource Repos without val-safe
+ */
 class ApiKeysFielder(projectDir: String) {
     private val apiKeys = File("$projectDir${File.separator}$KEYS_FILENAME").readLines()
 
@@ -14,6 +17,6 @@ class ApiKeysFielder(projectDir: String) {
     )
 
     val debugBuildFields = listOf(
-        BuildField("TMDB_API_KEY", apiKeys[TMDB_DEBUG_KEY_NUM])
+        BuildField("TMDB_API_KEY", if (apiKeys.size >= 2) apiKeys[TMDB_DEBUG_KEY_NUM] else apiKeys[TMDB_RELEASE_KEY_NUM])
     )
 }

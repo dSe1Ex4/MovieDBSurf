@@ -7,11 +7,13 @@
         <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/drawable/shape_app_bar.xml" value="0.5" />
         <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/drawable/shape_card_item_holder_movie.xml" value="0.31666666666666665" />
         <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/drawable/shape_card_search.xml" value="0.3296296296296296" />
+        <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/drawable/shape_progress_bar.xml" value="0.39166666666666666" />
         <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/drawable/vec_test.xml" value="0.32222222222222224" />
         <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/font/roboto.xml" value="0.31666666666666665" />
-        <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/layout/inc_error_search.xml" value="0.3875" />
         <entry key="..\:/AndroidProj/MovieDBSurf/app/src/main/res/layout/item_holder_movie.xml" value="0.33" />
+        <entry key="..\:/Programs/AndroidSDK/platforms/android-31/data/res/drawable/progress_horizontal_holo_dark.xml" value="0.39166666666666666" />
       </map>
     </option>
   </component>

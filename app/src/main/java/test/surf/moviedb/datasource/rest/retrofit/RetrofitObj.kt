@@ -1,4 +1,4 @@
-package test.surf.moviedb.rest.retrofit
+package test.surf.moviedb.datasource.rest.retrofit
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -10,5 +10,5 @@ object RetrofitObj {
         .baseUrl(BuildConfig.TMDB_BASE_URL)
         .build()
 
-    fun create() : RetrofitApi = retrofit.create(RetrofitApi::class.java)
+    fun createMovieApi() : MovieApi = retrofit.create(MovieApi::class.java)
 }

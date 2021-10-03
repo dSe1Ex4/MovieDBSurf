@@ -1,12 +1,12 @@
-package test.surf.moviedb.rest.retrofit
+package test.surf.moviedb.datasource.rest.retrofit
 
 import retrofit2.http.GET
 import retrofit2.http.Query
-import test.surf.moviedb.rest.api.MovieDiscoverApi
-import test.surf.moviedb.rest.api.MovieSearchApi
-import test.surf.moviedb.rest.dto.MoviePageDTO
+import test.surf.moviedb.datasource.rest.api.MovieDiscoverApi
+import test.surf.moviedb.datasource.rest.api.MovieSearchApi
+import test.surf.moviedb.datasource.rest.dto.MoviePageDTO
 
-interface RetrofitApi : MovieDiscoverApi, MovieSearchApi {
+interface MovieApi : MovieDiscoverApi, MovieSearchApi {
     @GET("discover/movie")
     override suspend fun getDiscoverMoviePage(
         @Query("api_key") apiKey: String,
