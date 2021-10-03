@@ -87,7 +87,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnClickMovie {
                 }
                 UiState.Status.SUCCESS -> {
                     viewStateHelper?.changeStateTo(ViewState.LOADED)
-                    //При использовании пагинации самымй оптимальный способ - notifyItemRangeInserted
+                    //При использовании своей пагинации самымй оптимальный способ - notifyItemRangeInserted
                     vB.rvMovie.adapter?.notifyDataSetChanged()
 
 

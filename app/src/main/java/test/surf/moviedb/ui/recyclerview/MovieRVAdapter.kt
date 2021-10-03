@@ -32,14 +32,14 @@ class MovieRVAdapter(
             tvDate.text = date
 
             if (movie.posterPath.isNullOrEmpty()){
+                // Можно нарисовать свой холдер, когда нет изображений
+                // Можно использовать стандартный Glide параметр error
                 ivLogo.setImageResource(R.drawable.shape_card_item_holder_movie)
             } else {
                 Glide.with(layout)
                     .load(BuildConfig.TMDB_IMG_BASE_URL+movie.posterPath)
                     .into(ivLogo)
             }
-
-
 
             btnHeart.setImageResource(
                 if (movie.isFavorite) R.drawable.ic_heart_fill else R.drawable.ic_heart
