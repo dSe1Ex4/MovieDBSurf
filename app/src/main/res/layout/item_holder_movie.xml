@@ -33,6 +33,7 @@
         android:fontFamily="@font/roboto_medium"
         android:lineSpacingExtra="2sp"
         android:maxLines="2"
+        android:ellipsize="end"
         tools:text="Бегущий по лезвию дедлайна 2022"
         android:textColor="@color/gray_black"
         android:textSize="22sp"
@@ -44,22 +45,25 @@
     <TextView
         android:id="@+id/tv_desc"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="14dp"
         android:layout_marginTop="8dp"
         android:lineSpacingExtra="4sp"
-        android:maxLines="3"
-        tools:text="Олег - талантливый программист, работает на «скорой», которая мчится от дедлайна"
         android:translationY="-1.8sp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toTopOf="@+id/btn_heart"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
         app:layout_constraintStart_toEndOf="@+id/iv_movie_logo"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        tools:text="Олег - талантливый программист, работает на «скорой», которая мчится от дедлайна" />
 
     <ImageView
         android:id="@+id/iv_calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:contentDescription="@string/iv_calendar"
         app:layout_constraintBottom_toTopOf="@+id/gl_bottom"
         app:layout_constraintStart_toEndOf="@+id/iv_movie_logo"
         app:srcCompat="@drawable/ic_calendar" />
@@ -81,6 +85,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        android:contentDescription="@string/btn_heart"
         app:layout_constraintBottom_toTopOf="@+id/gl_bottom"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
         app:srcCompat="@drawable/ic_heart" />

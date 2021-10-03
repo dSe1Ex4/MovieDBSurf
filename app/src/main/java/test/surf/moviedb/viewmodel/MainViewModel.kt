@@ -39,39 +39,57 @@ class MainViewModel @Inject constructor(private val movieService: IMovieService)
     private fun loadSearchedMovie(query: String){
         viewModelScope.launch(Dispatchers.IO){
             _uiState.emit(UiState.UPDATING)
-            loadMovies(query=query)
+            loadMoviesByQuery(query=query)
         }
     }
 
     private suspend fun loadMovies(page: Int = 1){
-        prepareForLoad()
         lastQuery = null
         var state = UiState.LOADED
+        val loadedData = mutableListOf<Movie>()
 
         movieService.getMoviesData(page)
             .catch {
                 Log.e("MainViewModel", it.stackTraceToString())
                 state = UiState.error(it.localizedMessage)
             }
-            .collect {
-                data.addAll(it)
-            }
+            .collect { loadedData.addAll(it) }
+
+        if (loadedData.isNotEmpty()){
+            loadData(loadedData)
+        }
+
         _uiState.emit(state)
     }
 
-    private suspend fun loadMovies(page: Int = 1, query: String = ""){
-        prepareForLoad()
-        var state = UiState.FOUND
+    private suspend fun loadMoviesByQuery(page: Int = 1, query: String = ""){
+        var state = UiState.found(lastQuery)
+        val loadedData = mutableListOf<Movie>()
 
         movieService.getMoviesDataByQuery(query, page)
             .catch {
                 Log.e("MainViewModel", it.stackTraceToString())
                 state = UiState.error(it.localizedMessage)
             }
-            .collect {
-                data.addAll(it)
+            .collect { loadedData.addAll(it) }
+
+        if (loadedData.isNotEmpty()){
+            loadData(loadedData)
+        } else {
+            //TODO Использовать PRIORITY STATE HELPER
+            if (state.status != UiState.Status.FAILED){
+                state = UiState.notFound(lastQuery)
+                data.clear()
             }
+        }
+
         _uiState.emit(state)
+    }
+
+    private fun loadData(loadedData: List<Movie>){
+        prepareForLoad()
+
+        data.addAll(loadedData)
     }
 
     private suspend fun refreshMovies(lastQuery: String?){
@@ -115,9 +133,15 @@ class MainViewModel @Inject constructor(private val movieService: IMovieService)
 
     override fun onSave(bundle: Bundle) {
         movieService.saveCacheNow()
+
+        bundle.putString(BUNDLE_LAST_QUERY_ID, lastQuery)
     }
 
     override fun onRestore(bundle: Bundle) {
+        lastQuery = bundle.getString(BUNDLE_LAST_QUERY_ID)
+    }
 
+    companion object{
+        const val BUNDLE_LAST_QUERY_ID = "lastQuery"
     }
 }

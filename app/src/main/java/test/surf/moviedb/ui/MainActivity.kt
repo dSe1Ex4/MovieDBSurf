@@ -30,17 +30,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnClickMovie {
     private var viewStateHelper: ViewStateHelper? = null
 
     override fun getViewBinding(inflater: LayoutInflater): ActivityMainBinding = ActivityMainBinding.inflate(inflater)
-    @SuppressLint("NotifyDataSetChanged")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (viewModel as? SaveableViewModel)?.let { saveable ->
-            savedInstanceState?.let {
-                saveable.onRestore(it)
-            }
-        }
+        mainSnackBar = Snackbar.make(vB.root, R.string.error_internet, Snackbar.LENGTH_LONG)
+        viewStateHelper = ViewStateHelper(vB)
 
+        restoreInstanceState(savedInstanceState)
+
+        initView()
+        startObserving()
+    }
+
+    private fun initView(){
         vB.pbMain.visibility = View.VISIBLE
+
+        vB.fabReload.setOnClickListener { requestRefreshing() }
 
         vB.rvMovie.apply{
             adapter = MovieRVAdapter(this@MainActivity, viewModel.data)
@@ -54,8 +60,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnClickMovie {
 
             requestRefreshing()
         }
-
-        vB.fabReload.setOnClickListener { requestRefreshing() }
 
         vB.etSearchQuery.setOnEditorActionListener { v, actionId, _ ->
             when (actionId){
@@ -71,11 +75,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnClickMovie {
                 else -> false
             }
         }
+    }
 
-        mainSnackBar = Snackbar.make(vB.root, R.string.error_internet, Snackbar.LENGTH_LONG)
 
-        viewStateHelper = ViewStateHelper(vB)
-
+    @SuppressLint("NotifyDataSetChanged")
+    private fun startObserving(){
         viewModel.uiState.observeOnState(lifecycle){
             when(it.status){
                 UiState.Status.UPDATING -> {
@@ -90,13 +94,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnClickMovie {
                     //При использовании своей пагинации самымй оптимальный способ - notifyItemRangeInserted
                     vB.rvMovie.adapter?.notifyDataSetChanged()
 
-
                 }
                 UiState.Status.FAILED -> {
                     viewStateHelper?.changeStateTo(ViewState.FAILED)
                     mainSnackBar?.setText(R.string.error_internet)?.show()
 
                     if (viewModel.data.isEmpty()){
+                        viewStateHelper?.changeStateTo(ViewState.EMPTY_FAILED)
                         vB.incErrorPanel.tvError.setText(R.string.error_request_failed)
                     }
                 }
@@ -104,10 +108,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnClickMovie {
                     viewStateHelper?.changeStateTo(ViewState.LOADED)
                     vB.rvMovie.adapter?.notifyDataSetChanged()
 
+                    vB.etSearchQuery.setText(it.msg)
+
                     if (viewModel.data.isEmpty()){
                         viewStateHelper?.changeStateTo(ViewState.EMPTY_SEARCH)
-                        vB.incErrorPanel.tvError.text = getString(R.string.error_search_empty, vB.etSearchQuery.text.toString())
+                        vB.incErrorPanel.tvError.text = getString(R.string.error_search_empty, it.msg)
                     }
+                }
+                UiState.Status.NOT_FOUND -> {
+                    vB.etSearchQuery.setText(it.msg)
+                    viewStateHelper?.changeStateTo(ViewState.EMPTY_SEARCH)
+                    vB.incErrorPanel.tvError.text = getString(R.string.error_search_empty, it.msg)
                 }
             }
         }
@@ -136,6 +147,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnClickMovie {
         vB.rvMovie.adapter?.notifyItemChanged(pos)
     }
 
+    private fun restoreInstanceState(savedInstanceState: Bundle?){
+        (viewModel as? SaveableViewModel)?.let { saveable ->
+            savedInstanceState?.let {
+                saveable.onRestore(it)
+            }
+        }
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         (viewModel as? SaveableViewModel)?.onSave(outState)
@@ -150,7 +169,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnClickMovie {
         val errorRIcon: Int = R.drawable.ic_alert_triangle
     ){
         object LOADING: ViewState(
-            pbTopVisibility = View.VISIBLE
+            pbTopVisibility = View.VISIBLE,
+            rvVisibility = View.VISIBLE
         )
 
         object EMPTY_LOADING: ViewState(
@@ -161,9 +181,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnClickMovie {
             rvVisibility = View.VISIBLE
         )
 
-        object FAILED: ViewState(
+        object EMPTY_FAILED: ViewState(
             incErrorPanelVisibility = View.VISIBLE,
             fabReloadVisibility = View.VISIBLE
+        )
+
+        object FAILED: ViewState(
+            rvVisibility = View.VISIBLE
         )
 
         object EMPTY_SEARCH: ViewState(

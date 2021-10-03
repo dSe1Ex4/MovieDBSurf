@@ -6,4 +6,6 @@
     <string name="error_request_failed">Нам не удалось обработать ваш запрос. Попробуйте еще раз</string>
     <string name="error_search_empty">По запросу “%1$s” ничего не найдено</string>
     <string name="t_unknown">Неизвестно</string>
+    <string name="iv_calendar">Картинка календаря</string>
+    <string name="btn_heart">Кнопка избранного</string>
 </resources>

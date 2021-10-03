@@ -5,4 +5,6 @@
     <string name="error_request_failed">We could not process your request. Please try again</string>
     <string name="error_search_empty">Nothing found for \"%1$s\"</string>
     <string name="t_unknown">Unknown</string>
+    <string name="iv_calendar">Calendar image</string>
+    <string name="btn_heart">Favorite button</string>
 </resources>
